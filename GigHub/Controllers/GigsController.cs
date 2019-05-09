@@ -34,7 +34,7 @@ namespace GigHub.Controllers
             {
                 ArtistID = User.Identity.GetUserId(),
                 Venue = vm.Venue,
-                DateTime = DateTime.Parse(string.Format("{0} {1}", vm.Date, vm.Time)),
+                DateTime = vm.DateTime,
                 GenreID = vm.Genre
             };
 
