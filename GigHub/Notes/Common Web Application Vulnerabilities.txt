@@ -1,0 +1,80 @@
+﻿                  SQL INJECTION
+
+Sql Injection allows attackers to execute malicious SQL STATEMENTS in our application.
+
+For example:
+If we have an line like this in our application:
+
+   var query="Select * from users where userID="+userID;
+
+   In this case the userID is an input that will be supplied from user and if he/she write
+   1234 or 1=1
+   it will extract all the users because of second part of input ,1=1 is always true.
+
+   The solution:
+   var query="Select * from users where userID=@userID";
+
+
+
+
+                       CROSS SITE SCRIPTING-XSS
+
+ Allows attackers to execute malicious SCRIPT on the victim's computer.
+ Depending on the sophistication of the attack, the attackers can access on the geolocation,
+ web cam of users etc.
+
+       How it works:
+	   The attacker will supply for example the input name with any of them malicious script.
+	         Name: <script>...</script>
+	   Where the victim visits this page,this malicious script is loaded and executed.
+
+
+	   How to prevent:
+	     Escaping content:
+		    which tells the browser to treat the content as the simple string
+			     Raw:
+				    <script>
+				Escaped:
+				    &lt;script&gt;
+
+
+       
+	   By default:
+	     ASP.NET rejects Javascript in inputs
+		 Razor views escape content:
+		    -Exception:
+			    Html.Raw();
+
+
+
+
+
+
+				CROSS SITE REQUEST FORGERY(CSRF)
+Allows an attacker to perform actions on behalf of the user without their knowledge.
+
+
+   How it Works: 
+    Example:
+		The victim:
+			Will log in into the paypal account and will transfer money in another account.
+			In the body of the request will be the targetAccount:4503 and the amount:1000
+
+		The attacker:
+			Will create a malicious website and will redirect somehow the victim in that 
+			website.
+			If the victim press the button supposed to press,the targetAccount will be change 
+			to the attacker account and all the money will be transfer there.
+
+
+
+	Preventing CSRF attack:
+	    1.
+			@using (Html.BeginForm())
+			{
+			  @Html.AntiForgeryToken()
+			}
+
+		2.
+			[ValidateAntiForgeryToken]
+			public ActionResult Create(){}
