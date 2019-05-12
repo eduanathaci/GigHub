@@ -23,7 +23,12 @@ textarea {
     max-width: 280px;
 }
 
-/*Bootstrap Override*/
+/*Non-bootstrap classes*/
+span.field-validation-error {
+    color: red;
+    font-weight: bold;
+}
+/*Bootstrap Classes Override*/
 body{
     font-size: 17px;
 }
