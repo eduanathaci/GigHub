@@ -22,3 +22,63 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/*Bootstrap Override*/
+body{
+    font-size: 17px;
+}
+.bg-dark {
+    background-color: #ff4342 !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff;
+}
+
+body{
+    font-family:Lato, Arial, Helvetica, sans-serif;
+}
+
+.body-content>form, .body-content>h2 {
+    margin: 2rem 24rem;
+}
+
+.form-group {
+    margin-bottom: 1.3rem;
+}
+
+.form-control {
+    font-size: 1.2rem;
+    padding: 7px 10px;
+    border-radius:12px;
+}
+
+.form-group input:hover,
+.form-group select:hover{
+    background: #ff4342;
+    color: #fff;
+}
+
+.btn {
+    padding: 5px 25px;
+    border-radius: 9px;
+}
+
+.form-control:focus{
+    box-shadow:none;
+}
+
+.dropdown-menu.show {
+    color:#000;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
+    color:#fff;
+    background-color: #e61918;
+}
+
+.navbar-brand{
+    font-weight:700;
+}
+
+
