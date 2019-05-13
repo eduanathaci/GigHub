@@ -87,3 +87,55 @@ body{
 }
 
 
+/*Page-level styles*/
+.gigs{
+    list-style: none;
+    margin-top: 1rem;
+}
+
+.gigs > li{
+    position: relative;
+    margin-bottom: 30px;
+}
+
+
+
+.gigs > li .details{
+    position: absolute;
+    top: 0;
+    left: 90px;
+}
+
+.gigs > li .date {
+    width: 4.5rem;
+    text-align: center;
+}
+
+.gigs > li .date .month {
+    background: red;
+    padding: 0.1rem 0.7rem;
+    border-radius: 0.7rem 0.7rem 0 0;
+    color: white;
+    font-size: 1rem;
+}
+
+.gigs > li .date .day {
+    background: #f7f7f7;
+    height: 2.5rem;
+    padding: 0.2rem 0.7rem;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.gigs > li .details .artist {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+.gigs >li .details .genre{
+    display: block;
+    font-size: 1rem;
+}
+
+
+
+
