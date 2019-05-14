@@ -216,8 +216,13 @@
     <Compile Include="Migrations\201905122139055_AddNameToApplicationUserTable.Designer.cs">
       <DependentUpon>201905122139055_AddNameToApplicationUserTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905132325358_AddAttendanceTable.cs" />
+    <Compile Include="Migrations\201905132325358_AddAttendanceTable.Designer.cs">
+      <DependentUpon>201905132325358_AddAttendanceTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Attendance.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Gig.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -352,6 +357,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905122139055_AddNameToApplicationUserTable.resx">
       <DependentUpon>201905122139055_AddNameToApplicationUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905132325358_AddAttendanceTable.resx">
+      <DependentUpon>201905132325358_AddAttendanceTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
