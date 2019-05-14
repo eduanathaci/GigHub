@@ -65,7 +65,7 @@ body{
 }
 
 .btn {
-    padding: 5px 25px;
+    padding: 2px 25px;
     border-radius: 9px;
 }
 
@@ -134,6 +134,22 @@ body{
 .gigs >li .details .genre{
     display: block;
     font-size: 1rem;
+}
+
+.details{
+    position: relative;
+}
+
+.details button {
+    position: absolute;
+    top:1.7rem;
+    left:4rem;
+    right: 0;
+}
+
+button.btn.btn-link.btn-sm.js-toggle-following {
+    position: absolute;
+    top: 55px;
 }
 
 

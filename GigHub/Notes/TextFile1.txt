@@ -1,0 +1,50 @@
+﻿             When To Use IEnumerable Or ICollection Or IList Or List
+
+   1.When and why we should choose IEnumerable
+
+		This is the base interface for any collection under system.Collection.
+		If you want iteration only, then it is the best choice to use.
+		Iteration means that you do not want any index based search or any write or 
+		any insert or remove.(only read records). You can only read records, nothing else.
+		IEnumerable contains only GetEnumerator() method, like read-only iterate.
+   
+   
+   2.When and why we should use ICollection
+
+       ICollection is one step ahead of IEnumerable. If we want some more functionality
+	   like Add or remove element, then it is better to go with ICollection because we cannot
+	   achieve that with IEnumerable. ICollection extends IEnumerable. It supports non-index 
+	   based operations like - Add item in Collection, remove, check contained item etc.
+	   ICollection has "Add" method. So, there is not any index as
+	   a parameter to insert or remove element at a particular index.
+
+
+	3.When and why we use IList
+
+       This is the only interface in the System.Collection that contains all functionality
+	   of IEnumerable and ICollection and additional functionality.As you are seeing in the 
+	   below code, IList has Insert and Remove methods. Both the methods accept index in their
+	   parameter. So, it supports index based operations over collection.
+	   IList is the last interface in the hierarchy of all collection interfaces.
+	   It extends ICollection.
+
+	4.When and why we use IList , why IList and Not List
+
+       List is the concrete class. This class implements IList, ICollection, IEnumerable.
+	   IList provides us full flexibility to expose any method that list implements.
+	   If we are making a class library and providing the DLL to two different clients
+	   to expose functionality, it's easy to make any change in interface rather than class.
+	   If we expose Class OR LIST outside the world, it is more difficult to handle every
+	   client that is using the same functionality. So, never change in concrete class.
+	   Always expose interface.
+
+
+
+	Conclusion
+ 
+      Move to expose interface. 
+	  Never do any changes in concrete class.
+	  Leave concrete class  for implementation.
+
+
+   

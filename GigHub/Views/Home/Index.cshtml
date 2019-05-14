@@ -1,7 +1,9 @@
-﻿@model IEnumerable<GigHub.Models.Gig>
+﻿@model  IEnumerable<GigHub.Models.Gig>
 @{
     ViewBag.Title = "Home Page";
 }
+
+@using Microsoft.AspNet.Identity;
 <link href="~/Content/Site.css" rel="stylesheet" />
 <ul class="gigs">
     @foreach (var gig in Model)
@@ -15,14 +17,64 @@
                     <div class="day">@gig.DateTime.Day</div>
                 *@
             </div>
+
             <div class="details">
-                <span class="artist">@gig.Artist.Name</span>
+                <span class="artist">
+                    @gig.Artist.Name
+                </span>
                 <span class="genre">@gig.Genre.Name</span>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <button data-gig-ID="@gig.ID" class="btn btn-light btn-sm js-toggle-attendance">Going?</button>
+                    <button class="btn btn-link btn-sm js-toggle-following" data-followee-ID="@gig.ArtistID">Follow</button>
+
+                }
+
             </div>
         </li>
     }
-
 </ul>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $(".js-toggle-attendance").click(function (e) {
+                //nese eshte tip i thjesht(int,double, string)
+                //ia dhajm paramentrat ne kete menyre me key si empty string
+                //$.post("/api/attendances", { "" : $(e.target).attr("data-gig-ID")})
+
+                //per tip komplex:
+                $.post("/api/attendances", { gigID: $(e.target).attr("data-gig-ID") })
+                    .done(function () {
+                        $(e.target)
+                            .removeClass("btn-light")
+                            .addClass("btn-primary")
+                            .text("Going");
+                    })
+                    .fail(function () {
+                        alert("This post attempt failed.");
+                    })
+            });
+
+            $(".js-toggle-following").click(function (e) {
+                $.post("/api/followings", { followeeID: $(e.target).attr("data-followee-ID") })
+                    .done(function () {
+                        $(e.target)
+                            .removeClass("btn-light")
+                            .addClass("btn-success")
+                            .text("Following");
+                    })
+                    .fail(function () {
+                        alert("You have already followed this artist.");
+                    })
+            });
+
+        });
+    </script>
+
+
+
+}
 
 
 
