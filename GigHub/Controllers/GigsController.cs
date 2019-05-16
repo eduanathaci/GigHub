@@ -16,7 +16,7 @@ namespace GigHub.Controllers
         {
             _context = new ApplicationDbContext();
         }
-        
+
 
         public ActionResult Mine()
         {
@@ -35,19 +35,21 @@ namespace GigHub.Controllers
         {
             var viewModel = new GigFormViewModel
             {
-                Genres = _context.Genres.ToList()
+                Genres = _context.Genres.ToList(),
+                Heading = "Add a Gig"
             };
-            return View(viewModel);
+            return View("GigForm", viewModel);
         }
 
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(GigFormViewModel vm)
         {
             if (!ModelState.IsValid)
             {
                 vm.Genres = _context.Genres.ToList();
-                return View("Create", vm);
+                return View("GigForm", vm);
             }
             var gig = new Gig
             {
@@ -59,6 +61,45 @@ namespace GigHub.Controllers
 
             _context.Gigs.Add(gig);
             _context.SaveChanges();
+            return RedirectToAction("Mine", "Gigs");
+        }
+
+
+        [HttpGet]
+        public ActionResult Update(int id)
+        {
+            var userID = User.Identity.GetUserId();
+
+            var gig = _context.Gigs
+                .Single(g => g.ID == id && g.ArtistID == userID);
+
+            var viewModel = new GigFormViewModel
+            {
+                ID=gig.ID,
+                Heading = "Edit this Gig",
+                Venue = gig.Venue,
+                Date = gig.DateTime.ToString("d MMM yyyy"),
+                Time = gig.DateTime.ToString("HH:mm"),
+                Genre = gig.GenreID,
+                Genres = _context.Genres.ToList()
+            };
+
+            return View("GigForm", viewModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Update(GigFormViewModel vm)
+        {
+            var gig = _context.Gigs.Single(g => g.ID == vm.ID);
+
+            gig.Venue = vm.Venue;
+            gig.DateTime = vm.GetDateTime();
+            gig.GenreID = vm.Genre;
+
+            _context.SaveChanges();
+
             return RedirectToAction("Mine","Gigs");
         }
 

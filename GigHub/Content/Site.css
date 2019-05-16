@@ -29,9 +29,10 @@ span.field-validation-error {
     font-weight: bold;
 }
 /*Bootstrap Classes Override*/
-body{
+body {
     font-size: 17px;
 }
+
 .bg-dark {
     background-color: #ff4342 !important;
 }
@@ -40,8 +41,8 @@ body{
     color: #fff;
 }
 
-body{
-    font-family:Lato, Arial, Helvetica, sans-serif;
+body {
+    font-family: Lato, Arial, Helvetica, sans-serif;
 }
 
 /*.body-content>form, .body-content>h2 {
@@ -55,11 +56,11 @@ body{
 .form-control {
     font-size: 1.2rem;
     padding: 7px 10px;
-    border-radius:12px;
+    border-radius: 12px;
 }
 
 .form-group input:hover,
-.form-group select:hover{
+.form-group select:hover {
     background: #ff4342;
     color: #fff;
 }
@@ -69,83 +70,92 @@ body{
     border-radius: 9px;
 }
 
-.form-control:focus{
-    box-shadow:none;
+.form-control:focus {
+    box-shadow: none;
 }
 
 .dropdown-menu.show {
-    color:#000;
+    color: #000;
 }
 
 .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
-    color:#fff;
+    color: #fff;
     background-color: #e61918;
 }
 
-.navbar-brand{
-    font-weight:700;
+.navbar-brand {
+    font-weight: 700;
 }
 
 
 /*Page-level styles*/
-.gigs{
+.gigs {
     list-style: none;
     margin-top: 1rem;
 }
 
-.gigs > li{
+    .gigs > li {
+        position: relative;
+        margin-bottom: 30px;
+    }
+
+
+
+        .gigs > li .details {
+            position: absolute;
+            top: 0;
+            left: 90px;
+        }
+
+        .gigs > li .date {
+            width: 4.5rem;
+            text-align: center;
+        }
+
+            .gigs > li .date .month {
+                background: red;
+                padding: 0.1rem 0.7rem;
+                border-radius: 0.7rem 0.7rem 0 0;
+                color: white;
+                font-size: 1rem;
+            }
+
+            .gigs > li .date .day {
+                background: #f7f7f7;
+                height: 2.5rem;
+                padding: 0.2rem 0.7rem;
+                color: #333;
+                font-size: 1.2rem;
+            }
+
+        .gigs > li .details .artist {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .gigs > li .details .genre {
+            display: block;
+            font-size: 1rem;
+        }
+
+        .gigs > li .actions {
+            display: none;
+        }
+
+        .gigs > li:hover .actions {
+            display: block;
+        }
+
+.details {
     position: relative;
-    margin-bottom: 30px;
 }
 
-
-
-.gigs > li .details{
-    position: absolute;
-    top: 0;
-    left: 90px;
-}
-
-.gigs > li .date {
-    width: 4.5rem;
-    text-align: center;
-}
-
-.gigs > li .date .month {
-    background: red;
-    padding: 0.1rem 0.7rem;
-    border-radius: 0.7rem 0.7rem 0 0;
-    color: white;
-    font-size: 1rem;
-}
-
-.gigs > li .date .day {
-    background: #f7f7f7;
-    height: 2.5rem;
-    padding: 0.2rem 0.7rem;
-    color: #333;
-    font-size: 1.2rem;
-}
-
-.gigs > li .details .artist {
-    font-weight: 600;
-    font-size: 1.1rem;
-}
-.gigs >li .details .genre{
-    display: block;
-    font-size: 1rem;
-}
-
-.details{
-    position: relative;
-}
-
-.details button {
-    position: absolute;
-    top:1.7rem;
-    left:4rem;
-    right: 0;
-}
+    .details button {
+        position: absolute;
+        top: 1.7rem;
+        left: 4rem;
+        right: 0;
+    }
 
 button.btn.btn-link.btn-sm.js-toggle-following {
     position: absolute;
@@ -153,25 +163,20 @@ button.btn.btn-link.btn-sm.js-toggle-following {
 }
 
 .container-custom {
-    padding:1rem;
+    padding: 1rem;
 }
 
-.container-custom .info{
-    position: relative;
-}
-
-    .container-custom .info button {
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 8rem;
-        padding: 5px;
-        
+    .container-custom .info {
+        position: relative;
     }
 
-
-
-
+        .container-custom .info button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 8rem;
+            padding: 5px;
+        }
 
 
 
