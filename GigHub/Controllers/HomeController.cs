@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using GigHub.Models;
 using GigHub.ViewModels;
+using Microsoft.AspNet.Identity;
+using System.Data.Entity;
 
 namespace GigHub.Controllers
 {
@@ -23,11 +25,11 @@ namespace GigHub.Controllers
                 .Include("Genre")
                 .Where(g => g.DateTime > DateTime.Now);
 
-            var viewModel = new GigViewModel
-            {
-                UpcomingGigs = upcomingGigs,
-                ShowActions = User.Identity.IsAuthenticated
-            };
+            //var viewModel = new GigViewModel
+            //{
+            //    UpcomingGigs = upcomingGigs,
+            //    ShowActions = User.Identity.IsAuthenticated
+            //};
 
             return View(upcomingGigs);
         }
@@ -44,6 +46,25 @@ namespace GigHub.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult Following()
+        {
+            var userID = User.Identity.GetUserId();
+
+            var followees = _context.Followings
+                .Include("Followee")
+                .ToList();
+
+
+            var following = new FollowingViewModel
+            {
+                Artists =followees,
+                FollowerID = userID
+            };
+
+            return View(following);
         }
     }
 }

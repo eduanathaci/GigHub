@@ -152,6 +152,27 @@ button.btn.btn-link.btn-sm.js-toggle-following {
     top: 55px;
 }
 
+.container-custom {
+    padding:1rem;
+}
+
+.container-custom .info{
+    position: relative;
+}
+
+    .container-custom .info button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 8rem;
+        padding: 5px;
+        
+    }
+
+
+
+
+
 
 
 

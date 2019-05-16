@@ -40,5 +40,6 @@ namespace GigHub.Controllers
             _context.SaveChanges();
             return Ok();
         }
+        
     }
 }

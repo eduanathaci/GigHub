@@ -12,8 +12,9 @@
             @User.Identity.GetUserName()
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="@Url.Action("Mine","Gigs")">My Upcoming Gigs</a>
             <a class="dropdown-item" href="@Url.Action("Attending","Gigs")">Gigs I am Going</a>
-            <a class="dropdown-item" href="#">Artists I am Following</a>
+            <a class="dropdown-item" href="@Url.Action("Following","Home")">Artists I am Following</a>
             <div class="dropdown-divider"></div>
             <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item">Log off</a>
         </div>
