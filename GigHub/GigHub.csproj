@@ -196,6 +196,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GigsApiController.cs" />
     <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\Dtos\AttendanceDto.cs" />
     <Compile Include="Controllers\Dtos\FollowingsDto.cs" />
@@ -238,14 +239,25 @@
     <Compile Include="Migrations\201905140517543_AddFollowingTable.Designer.cs">
       <DependentUpon>201905140517543_AddFollowingTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905170222195_IsCanceledColumnAddedToGigTable.cs" />
+    <Compile Include="Migrations\201905170222195_IsCanceledColumnAddedToGigTable.Designer.cs">
+      <DependentUpon>201905170222195_IsCanceledColumnAddedToGigTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905192340084_AddNotificationAndNotificationUserTables.cs" />
+    <Compile Include="Migrations\201905192340084_AddNotificationAndNotificationUserTables.Designer.cs">
+      <DependentUpon>201905192340084_AddNotificationAndNotificationUserTables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Attendance.cs" />
+    <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\Following.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\Gig.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\NotificationType.cs" />
+    <Compile Include="Models\UserNotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\FollowingViewModel.cs" />
@@ -255,6 +267,8 @@
     <Compile Include="ViewModels\ValidTime.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Notes\Refactoring Object Oriented Design.txt" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -363,6 +377,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\Api\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -391,6 +406,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905140517543_AddFollowingTable.resx">
       <DependentUpon>201905140517543_AddFollowingTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905170222195_IsCanceledColumnAddedToGigTable.resx">
+      <DependentUpon>201905170222195_IsCanceledColumnAddedToGigTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905192340084_AddNotificationAndNotificationUserTables.resx">
+      <DependentUpon>201905192340084_AddNotificationAndNotificationUserTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

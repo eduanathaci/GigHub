@@ -23,10 +23,62 @@
                 </span>
                 <span class="genre">@gig.Genre.Name</span>
                 <div class="actions">
-                    <a href="@Url.Action("Update","Gigs",new { id=gig.ID})">Edit</a>
+                    <a href="@Url.Action("Update","Gigs",new { id=gig.ID})">Edit</a>|
+                    <a href="#"
+                       class="js-cancel-gig"
+                       data-gig-id="@gig.ID">
+                        Cancel
+                    </a>
+
                 </div>
             </div>
         </li>
     }
 </ul>
+
+@section scripts
+    {
+    <script>
+        $(document).ready(function () {
+            $(".js-cancel-gig").click(function (e) {
+                var link = $(e.target);
+
+                bootbox.dialog({
+                    title: 'Confirm',
+                    message: '<p style="font-weight:bold;">Are you sure you want to cancel this gig ?</p>',
+                    size: 'middle',
+                    buttons: {
+                        no: {
+                            label: 'No',
+                            className: 'btn-light',
+                            callback: function () {
+                                bootbox.hideAll();
+                            }
+                        },
+                        yes: {
+                            label: 'Yes',
+                            className: 'btn-danger',
+                            callback: function () {
+                                $.ajax({
+                                    url: "/api/gigsApi" + link.attr("data-gig-id"),
+                                    method: "DELETE",
+                                    success: function () {
+                                        link.parents("li").fadeOut(function () {
+                                            $(this).remove();
+                                        });
+                                    },
+                                    error:
+                                        function () {
+                                            bootbox.alert("Something failed!")
+                                        }
+                                });
+                            }
+                        }
+                    }
+                })
+            });
+        });
+
+    </script>
+}
 

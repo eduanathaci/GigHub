@@ -19,10 +19,19 @@
                 <span class="artist">
                     @gig.Artist.Name
                 </span>
+                @if (gig.IsCanceled)
+                {
+                    <span class="badge badge-pill badge-warning">Canceled</span>
+
+                }
                 <span class="genre">@gig.Genre.Name</span>
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <button data-gig-ID="@gig.ID" class="btn btn-primary btn-sm js-toggle-attendance">Going</button>
+                    if (!gig.IsCanceled)
+                    {
+                        <button data-gig-ID="@gig.ID" class="btn btn-primary btn-sm js-toggle-attendance">Going</button>
+
+                    }
                     <button class="btn btn-link btn-sm js-toggle-following" data-followee-ID="@gig.ArtistID">Follow</button>
 
                 }

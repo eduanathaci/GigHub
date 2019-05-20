@@ -23,7 +23,9 @@ namespace GigHub.Controllers
             var userID = User.Identity.GetUserId();
 
             var gigs = _context.Gigs
-                .Where(g => g.ArtistID == userID)
+                .Where(g => g.ArtistID == userID &&
+                            g.DateTime > DateTime.Now &&
+                            !g.IsCanceled)
                 .Include(g => g.Genre)
                 .ToList();
 
@@ -75,7 +77,7 @@ namespace GigHub.Controllers
 
             var viewModel = new GigFormViewModel
             {
-                ID=gig.ID,
+                ID = gig.ID,
                 Heading = "Edit this Gig",
                 Venue = gig.Venue,
                 Date = gig.DateTime.ToString("d MMM yyyy"),
@@ -100,7 +102,7 @@ namespace GigHub.Controllers
 
             _context.SaveChanges();
 
-            return RedirectToAction("Mine","Gigs");
+            return RedirectToAction("Mine", "Gigs");
         }
 
         public ActionResult Attending()
@@ -121,6 +123,28 @@ namespace GigHub.Controllers
             };
 
             return View(viewModel);
+        }
+
+        public ActionResult Edit(GigFormViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                viewModel.Genres = _context.Genres.ToList();
+                return RedirectToAction("GigForm", viewModel);
+
+            }
+
+            var userID = User.Identity.GetUserId();
+
+            var gig = _context.Gigs
+                .Include(g => g.Attendances.Select(a => a.Attendee))
+                .Single(g => g.ID==viewModel.ID && g.ArtistID==userID);
+
+            gig.Modify(viewModel.Venue, viewModel.Genre, viewModel.GetDateTime());
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Mine", "Gigs");
         }
     }
 }

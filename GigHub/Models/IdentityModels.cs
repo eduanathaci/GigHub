@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System;
 
 namespace GigHub.Models
 {
@@ -19,11 +20,13 @@ namespace GigHub.Models
 
         public ICollection<Following> Followers { get; set; }
         public ICollection<Following> Followees { get; set; }
+        public ICollection<UserNotification> UserNotifications { get; set; }
 
         public ApplicationUser()
         {
             Followers = new Collection<Following>();
             Followees = new Collection<Following>();
+            UserNotifications = new Collection<UserNotification>();
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -32,6 +35,11 @@ namespace GigHub.Models
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
             return userIdentity;
+        }
+
+        public void Notify(Notification notification)
+        {
+            UserNotifications.Add(new UserNotification(this, notification));
         }
     }
 
@@ -46,6 +54,8 @@ namespace GigHub.Models
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Attendance> Attendances { get; set; }
         public DbSet<Following> Followings { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<UserNotification> UserNotifications { get; set; }
 
         public static ApplicationDbContext Create()
         {
@@ -56,7 +66,7 @@ namespace GigHub.Models
         {
             modelBuilder.Entity<Attendance>()
                 .HasRequired(a => a.Gig)
-                .WithMany()
+                .WithMany(g => g.Attendances)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ApplicationUser>()
@@ -69,6 +79,10 @@ namespace GigHub.Models
                 .WithRequired(f => f.Follower)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<UserNotification>()
+                .HasRequired(u => u.User)
+                .WithMany(u => u.UserNotifications)
+                .WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);
         }
