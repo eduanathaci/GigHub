@@ -8,7 +8,7 @@ using GigHub.Models;
 using GigHub.Controllers.Dtos;
 using Microsoft.AspNet.Identity;
 
-namespace GigHub.Controllers
+namespace GigHub.Controllers.Api
 {
     public class FollowingsController : ApiController
     {

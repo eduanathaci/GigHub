@@ -1,31 +1,51 @@
 ﻿@using Microsoft.AspNet.Identity
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+
+</head>
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
+        @Html.AntiForgeryToken()
 
-<ul class="nav navbar-nav navbar-right">
-    
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            @User.Identity.GetUserName()
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="@Url.Action("Mine","Gigs")">My Upcoming Gigs</a>
-            <a class="dropdown-item" href="@Url.Action("Attending","Gigs")">Gigs I am Going</a>
-            <a class="dropdown-item" href="@Url.Action("Following","Home")">Artists I am Following</a>
-            <div class="dropdown-divider"></div>
-            <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item">Log off</a>
-        </div>
-    </li>
-</ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li class="notifications"
+                data-toggle="popover" 
+                title="Popover title" 
+                data-content="And here's some amazing content. It's very engaging. Right?"
+                data-placement="bottom">
+                <a href="#">
+                    <i class="fas fa-globe-europe"></i>
+                    <span class="badge badge-danger js-notifications-count hide"></span>
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @User.Identity.GetUserName()
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="@Url.Action("Mine","Gigs")">My Upcoming Gigs</a>
+                    <a class="dropdown-item" href="@Url.Action("Attending","Gigs")">Gigs I am Going</a>
+                    <a class="dropdown-item" href="@Url.Action("Following","Home")">Artists I am Following</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item">Log off</a>
+                </div>
+            </li>
+        </ul>
     }
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink",@class="nav-link"})</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink",@class="nav-link"})</li>
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link" })</li>
     </ul>
 }
+
+
+
+
+

@@ -87,6 +87,23 @@ body {
     font-weight: 700;
 }
 
+.fas {
+    color: white;
+    padding: 0.9rem;
+}
+
+a {
+    position: relative;
+}
+
+.badge-danger {
+    color: #fff;
+    background-color: #dc3545;
+    position: absolute;
+    top: -8px;
+    left: 25px;
+}
+
 
 /*Page-level styles*/
 .gigs {
@@ -177,7 +194,3 @@ button.btn.btn-link.btn-sm.js-toggle-following {
             left: 8rem;
             padding: 5px;
         }
-
-
-
-
