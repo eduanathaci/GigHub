@@ -38,53 +38,52 @@
     }
 </ul>
 
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $(".js-cancel-gig").click(function (e) {
+                var link = $(e.target);
 
+                bootbox.dialog({
+                    title: 'Confirm',
+                    message: '<p style="font-weight:bold;">Are you sure you want to cancel this gig ?</p>',
+                    size: 'middle',
+                    buttons: {
 
-@* This integrated file should be fixed, it must be into bundled files but for now is the only finded way in order to work cancel action *@
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
-
-<script>
-    $(document).ready(function () {
-        $(".js-cancel-gig").click(function (e) {
-            var link = $(e.target);
-
-            bootbox.dialog({
-                title: 'Confirm',
-                message: '<p style="font-weight:bold;">Are you sure you want to cancel this gig ?</p>',
-                size: 'middle',
-                buttons: {
-                    no: {
-                        label: 'No',
-                        className: 'btn-light',
-                        callback: function () {
-                            bootbox.hideAll();
-                        }
-                    },
-                    yes: {
-                        label: 'Yes',
-                        className: 'btn-danger',
-                        callback: function () {
-                            $.ajax({
-                                url: "/api/gigsApi/" + link.attr("data-gig-id"),
-                                method: "DELETE"
-                            }).done(function () {
-                                link.parents("li").fadeIn(function () {
-                                    $(this).remove();
-                                }
+                        yes: {
+                            label: 'Yes',
+                            className: 'btn-danger',
+                            callback: function () {
+                                $.ajax({
+                                    url: "/api/gigsApi/" + link.attr("data-gig-id"),
+                                    method: "DELETE"
+                                }).done(function () {
+                                    link.parents("li").fadeIn(function () {
+                                        $(this).remove();
+                                    }
+                                    )
+                                }).fail(
+                                    function () {
+                                        bootbox.alert("Something failed!")
+                                    }
                                 )
-                            }).fail(
-                                function () {
-                                    bootbox.alert("Something failed!")
-                                }
-                            )
 
+                            }
+                        },
+                        no: {
+                            label: 'No',
+                            className: 'btn-light',
+                            callback: function () {
+                                bootbox.hideAll();
+                            }
                         }
                     }
-                }
-            })
+                })
+            });
         });
-    });
 
-</script>
+    </script>
+
+}
 
 

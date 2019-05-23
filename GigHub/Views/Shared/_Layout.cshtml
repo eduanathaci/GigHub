@@ -33,21 +33,86 @@
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
+    <div class="notifications-template">
+
+    </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
+    <script id="notifications-template" type="text/template">
+        <ul class=".notifications">
+            <%
+            _.each(notifications,function(notification)
+            {
+            if(notification.type==1)
+            { %>
+            <li>
+                <span class="font-weight-bold"> <%= notification.gig.artist.name %> </span>has created the gig in <%= notification.gig.venue %> at <%= moment(notification.gig.dateTime).format("D MMM HH:mm")%>.
+            </li>
+            <% }
+            @*else if(notification.type==2)
+        {
+            var changes=[];
+            originalValues=[];
+            newValues=[];
+
+            if(notification.originalVenue != notification.gig.venue)
+            {
+            changes.push('venue');
+            originalVenue.push(notification.originalVenue);
+            newValues.push(notification.gig.venue);
+            }
+
+            if(notification.originalDateTime != notification.gig.dateTime)
+            {
+            changes.push('date/time');
+            originalVenue.push(notification.originalDateTime);
+            newValues.push(notification.gig.dateTime);
+            }
+
+            %>
+            <li>
+                <span class="font-weight-bold"> <%= notification.gig.artist.name %> </span> has changed the <%= changes.join(' and ') %> of the gig from <%= originalValues.join('/') %> to <%= newValues.join('/')%>.
+            </li>
+
+
+        <% }*@
+
+            }); %>
+
+        </ul>
+    </script>
+
     <script type="text/javascript" language="javascript">
         $(document).ready(function () {
-            $.getJSON("/api/notifications", function (data) {
+            $.getJSON("/api/notifications", function (notifications) {
+                if (notifications.length == 0)
+                    return;
 
                 $(".js-notifications-count")
-                    .text(data.length)
+                    .text(notifications.length)
                     .removeClass("hide")
                     .addClass("animated zoomInDown");
+                
+                $(".notifications").popover(
+                    {
+                        html: true,
+                        title: "Notifications",
+                        content: function () {
+                            var mytemplate = _.template($("#notifications-template").html());
+
+                            return mytemplate({ notifications: notifications })
+                        },
+                        placement: "bottom"
+                    });
             });
-            $('[data-toggle="popover"]').popover();
+
+            //This line is used to init popover in every element with data-toggle:popover attribute
+            //$('[data-toggle="popover"]').popover();
+
+
         });
 
     </script>

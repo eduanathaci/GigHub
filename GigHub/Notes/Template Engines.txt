@@ -1,0 +1,26 @@
+﻿
+
+A template processor (also known as a template engine or template parser) is 
+software designed to combine templates with a data model to produce result documents.
+
+Razor is one of them.
+Underscore.js
+etc...
+
+Those templates enable us to use logic within markup languange.
+
+
+
+                  Underscore.js as template engine
+
+Everything you need to know about underscore template. Only 3 things to keep in mind:
+
+<%  %> - to execute some code
+<%= %> - to print some value in template
+<%- %> - to print some values HTML escaped
+That's all about it.
+
+Simple example:
+
+var tpl = _.template("<h1>Some text: <%= foo %></h1>");
+then tpl({foo: "blahblah"}) would be rendered to the string <h1>Some text: blahblah</h1>

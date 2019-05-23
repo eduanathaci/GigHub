@@ -194,3 +194,27 @@ button.btn.btn-link.btn-sm.js-toggle-following {
             left: 8rem;
             padding: 5px;
         }
+
+
+.popover ul {
+    padding-left: 0;
+    list-style: none;
+    max-height: 20rem;
+    max-width: 20rem;
+    overflow-y: scroll;
+}
+.popover ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    
+}
+
+.popover li:last-child{
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+
+
+
+
