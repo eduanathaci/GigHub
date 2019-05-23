@@ -1,21 +1,28 @@
-﻿@model  IEnumerable<GigHub.Models.Gig>
+﻿@model  GigHub.ViewModels.GigViewModel
 @{
     ViewBag.Title = "Home Page";
 }
 
 @using Microsoft.AspNet.Identity;
 <link href="~/Content/Site.css" rel="stylesheet" />
+@using (Html.BeginForm("Search", "Gigs"))
+{
+    <div class="form-group">
+        <div class="input-group">
+            @Html.TextBoxFor(m => m.Search, new { @class = "form-control" ,@placeholder="Search by artist,genre..."})
+            <input type="submit" name="name" value="Search" class="btn btn-primary ml-1" />
+        </div>
+    </div>
+}
 <ul class="gigs">
-    @foreach (var gig in Model)
+    @foreach (var gig in Model.UpcomingGigs)
     {
 
         <li>
             <div class="date">
                 <div class="month">@gig.DateTime.ToString("MMM")</div>
                 <div class="day">@gig.DateTime.ToString("d ")</div>
-                @* Same result:
-                    <div class="day">@gig.DateTime.Day</div>
-                *@
+               
             </div>
 
             <div class="details">
@@ -32,7 +39,7 @@
 
             </div>
         </li>
-    }
+        }
 </ul>
 
 

@@ -53,32 +53,32 @@
             </li>
             <% }
             @*else if(notification.type==2)
-        {
-            var changes=[];
-            originalValues=[];
-            newValues=[];
+                {
+                    var changes=[];
+                    originalValues=[];
+                    newValues=[];
 
-            if(notification.originalVenue != notification.gig.venue)
-            {
-            changes.push('venue');
-            originalVenue.push(notification.originalVenue);
-            newValues.push(notification.gig.venue);
-            }
+                    if(notification.originalVenue != notification.gig.venue)
+                    {
+                    changes.push('venue');
+                    originalVenue.push(notification.originalVenue);
+                    newValues.push(notification.gig.venue);
+                    }
 
-            if(notification.originalDateTime != notification.gig.dateTime)
-            {
-            changes.push('date/time');
-            originalVenue.push(notification.originalDateTime);
-            newValues.push(notification.gig.dateTime);
-            }
+                    if(notification.originalDateTime != notification.gig.dateTime)
+                    {
+                    changes.push('date/time');
+                    originalVenue.push(notification.originalDateTime);
+                    newValues.push(notification.gig.dateTime);
+                    }
 
-            %>
-            <li>
-                <span class="font-weight-bold"> <%= notification.gig.artist.name %> </span> has changed the <%= changes.join(' and ') %> of the gig from <%= originalValues.join('/') %> to <%= newValues.join('/')%>.
-            </li>
+                    %>
+                    <li>
+                        <span class="font-weight-bold"> <%= notification.gig.artist.name %> </span> has changed the <%= changes.join(' and ') %> of the gig from <%= originalValues.join('/') %> to <%= newValues.join('/')%>.
+                    </li>
 
 
-        <% }*@
+                <% }*@
 
             }); %>
 
@@ -95,7 +95,7 @@
                     .text(notifications.length)
                     .removeClass("hide")
                     .addClass("animated zoomInDown");
-                
+
                 $(".notifications").popover(
                     {
                         html: true,
@@ -106,6 +106,17 @@
                             return mytemplate({ notifications: notifications })
                         },
                         placement: "bottom"
+                    }).on("shown.bs.popover", function () {
+                        $.ajax({
+                            url: "/api/notifications",
+                            method: "PUT"
+                        }).done(function () {
+                            $(".js-notifications-count")
+                                .text("")
+                                .addClass("hide");
+                        })
+                           
+
                     });
             });
 

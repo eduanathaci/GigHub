@@ -10,5 +10,6 @@ namespace GigHub.ViewModels
     {
         public IEnumerable<Gig> UpcomingGigs { get; set; }
         public bool ShowActions { get; set; }
+        public string Search { get; set; }
     }
 }

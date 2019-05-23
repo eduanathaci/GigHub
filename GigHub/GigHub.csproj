@@ -254,6 +254,10 @@
     <Compile Include="Migrations\201905192340084_AddNotificationAndNotificationUserTables.Designer.cs">
       <DependentUpon>201905192340084_AddNotificationAndNotificationUserTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905230406099_AddSearchToGig.cs" />
+    <Compile Include="Migrations\201905230406099_AddSearchToGig.Designer.cs">
+      <DependentUpon>201905230406099_AddSearchToGig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Attendance.cs" />
@@ -425,6 +429,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905192340084_AddNotificationAndNotificationUserTables.resx">
       <DependentUpon>201905192340084_AddNotificationAndNotificationUserTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905230406099_AddSearchToGig.resx">
+      <DependentUpon>201905230406099_AddSearchToGig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

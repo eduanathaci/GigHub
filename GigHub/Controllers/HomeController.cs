@@ -18,20 +18,36 @@ namespace GigHub.Controllers
         {
             _context = new ApplicationDbContext();
         }
-        public ActionResult Index()
+        public ActionResult Index(string query=null)
         {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+
+            }
+
             var upcomingGigs = _context.Gigs
-                .Include("Artist")
-                .Include("Genre")
+                .Include(g => g.Artist)
+                .Include(g => g.Genre)
                 .Where(g => g.DateTime > DateTime.Now && !g.IsCanceled);
 
-            //var viewModel = new GigViewModel
-            //{
-            //    UpcomingGigs = upcomingGigs,
-            //    ShowActions = User.Identity.IsAuthenticated
-            //};
+            if (!string.IsNullOrWhiteSpace(query))
+            {
+                upcomingGigs = _context.Gigs
+                    .Where(g =>
+                             g.Artist.Name.Contains(query) ||
+                             g.Genre.Name.Contains(query) ||
+                             g.Venue.Contains(query));
+            }
 
-            return View(upcomingGigs);
+            var viewmodel = new GigViewModel
+            {
+                UpcomingGigs = upcomingGigs,
+                ShowActions = User.Identity.IsAuthenticated,
+                Search = query
+            };
+
+            return View("Index",viewmodel);
         }
 
         public ActionResult About()
